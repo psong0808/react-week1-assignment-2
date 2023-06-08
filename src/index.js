@@ -20,9 +20,15 @@ function createElement(tagName, props, ...children) {
   return element;
 }
 
+const initialState = { result: 0, midResult: 0, operator: '' };
+
 function render({
   result, midResult, operator,
 }) {
+  function handleClickReset() {
+    render(initialState);
+  }
+
   function handleClickNum(num) {
     if (operator) {
       switch (operator) {
@@ -73,6 +79,10 @@ function render({
           <button type="button" onClick={() => handleClickOperator(char)}>{char}</button>
         ))}
       </p>
+      <p>
+        <button type="button" onClick={handleClickReset}>Reset</button>
+      </p>
+
     </div>
   );
 
@@ -80,4 +90,4 @@ function render({
   document.getElementById('app').appendChild(element);
 }
 
-render({ result: 0 });
+render(initialState);
